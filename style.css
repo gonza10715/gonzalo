@@ -18,3 +18,7 @@
 .portfolio-demo-link .go{color:var(--lime);font-size:12px;margin-top:auto;padding-top:18px}
 @media(max-width:740px){.portfolio-demos{margin-top:45px}.portfolio-demos-grid{grid-template-columns:1fr}.portfolio-demo-link{min-height:170px}}
 @media(prefers-reduced-motion:reduce){.portfolio-demo-link{transition:none}}
+
+/* Accesibilidad: acceso rápido al contenido mediante teclado. */
+.skip-link{position:absolute;z-index:100;top:-80px;left:16px;padding:12px 18px;background:var(--lime);color:var(--bg);font-weight:700;border-radius:5px}
+.skip-link:focus{top:12px}
