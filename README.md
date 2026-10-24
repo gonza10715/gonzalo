@@ -2,7 +2,7 @@
 
 Sitio comercial de Gonzalo Martínez, desarrollador web de San Miguel, Buenos Aires.
 
-**[Ver sitio publicado](https://gmweb-servicios.netlify.app/)** · [Consultar por WhatsApp](https://wa.me/5491132284507)
+**[Ver sitio publicado](https://gonza10715.github.io/gonzalo/)** · [Consultar por WhatsApp](https://wa.me/5491132284507)
 
 ## Qué incluye
 
@@ -28,11 +28,11 @@ Abrí `index.html` en un navegador. También podés ejecutar `python -m http.ser
 
 ## Nuevas demos del portfolio
 
-- [Casa Brava — restaurante con filtros de menú](demos/restaurante/index.html)
-- [Norte Studio — tienda con catálogo y carrito simulado](demos/tienda/index.html)
-- [Portfolio técnico de Gonzalo Martínez](demos/portfolio/index.html)
+- [Casa Brava — restaurante con filtros de menú](https://gonza10715.github.io/gonzalo/demos/restaurante/)
+- [Norte Studio — tienda con catálogo y carrito simulado](https://gonza10715.github.io/gonzalo/demos/tienda/)
+- [Portfolio técnico de Gonzalo Martínez](https://gonza10715.github.io/gonzalo/demos/portfolio/)
 
-Estas páginas están guardadas como archivos HTML en el repositorio. Para abrirlas como sitios públicos hay que configurar su publicación (por ejemplo, GitHub Pages o Netlify); el enlace al archivo en GitHub no es una vista alojada.
+Estas demos están publicadas mediante GitHub Pages desde la rama `main`. Son ejemplos ficticios de portfolio y no procesan operaciones reales.
 
 ## Alcance
 
