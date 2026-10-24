@@ -31,6 +31,8 @@ Abrí `index.html` en un navegador. También podés ejecutar `python -m http.ser
 - [Casa Brava — restaurante con filtros de menú](https://gonza10715.github.io/gonzalo/demos/restaurante/)
 - [Norte Studio — tienda con catálogo y carrito simulado](https://gonza10715.github.io/gonzalo/demos/tienda/)
 - [ATELIER — arquitectura, galería filtrable y contacto](https://gonza10715.github.io/gonzalo/demos/atelier/)
+- [VELOCE Motors — catálogo premium de vehículos ficticios](https://gonza10715.github.io/gonzalo/demos/veloce/)
+- [SERENA Casa Hotel — habitaciones y simulador de estadía](https://gonza10715.github.io/gonzalo/demos/serena/)
 - [Portfolio técnico de Gonzalo Martínez](https://gonza10715.github.io/gonzalo/demos/portfolio/)
 
 Estas demos están publicadas mediante GitHub Pages desde la rama `main`. Son ejemplos ficticios de portfolio y no procesan operaciones reales.
