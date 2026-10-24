@@ -1,4 +1,4 @@
-# GM Web · Websites for local businesses
+# GM Web · Sitios web para negocios
 
 Sitio comercial de Gonzalo Martínez, desarrollador web de San Miguel, Buenos Aires.
 
@@ -26,7 +26,7 @@ Abrí `index.html` en un navegador. También podés ejecutar `python -m http.ser
 - `style.css`: identidad visual y estilos adaptables.
 - `app.js`: filtros, selección de productos, demo de stock y contacto.
 
-## Nuevas demos del portfolio
+## Demos del portfolio
 
 - [Casa Brava — restaurante con filtros de menú](https://gonza10715.github.io/gonzalo/demos/restaurante/)
 - [Norte Studio — tienda con catálogo y carrito simulado](https://gonza10715.github.io/gonzalo/demos/tienda/)
@@ -39,6 +39,32 @@ Abrí `index.html` en un navegador. También podés ejecutar `python -m http.ser
 - [Portfolio técnico de Gonzalo Martínez](https://gonza10715.github.io/gonzalo/demos/portfolio/)
 
 Estas demos están publicadas mediante GitHub Pages desde la rama `main`. Son ejemplos ficticios de portfolio y no procesan operaciones reales.
+
+### Funciones demostradas
+
+| Proyecto | Interacción principal | Tecnologías de esta demo |
+| --- | --- | --- |
+| GM Web | Menú filtrable, control de stock y consulta prearmada | HTML, CSS, JavaScript |
+| Casa Brava | Filtros de menú | HTML, CSS, JavaScript |
+| Norte Studio | Catálogo y carrito de prueba | HTML, CSS, JavaScript |
+| ATELIER | Galería de proyectos filtrable | HTML, CSS, JavaScript |
+| VELOCE Motors | Catálogo de vehículos con filtros | HTML, CSS, JavaScript |
+| SERENA Casa Hotel | Simulación de una estadía | HTML, CSS, JavaScript |
+| CLARA Dental | Filtros de especialidades y turnos de prueba | HTML, CSS, JavaScript |
+| LOMA Propiedades | Búsqueda combinada de inmuebles | HTML, CSS, JavaScript |
+| AZAHAR Flores | Filtros, selección de ramos y cálculo de total | HTML, CSS, JavaScript |
+
+El portfolio técnico enlaza además proyectos independientes del perfil, como el inventario con Flask y SQLite. Esos repositorios tienen su propio código y tecnologías; no forman parte del despliegue estático de GM Web.
+
+### Pruebas manuales recomendadas
+
+1. Abrir el sitio desde un celular y una computadora; revisar que el menú, los textos y las tarjetas no se corten.
+2. En GM Web, cambiar categorías del menú y sumar/restar unidades en el stock. Comprobar que ninguna cantidad sea negativa y que «Restablecer» recupere los valores iniciales.
+3. Completar el formulario de contacto. Confirmar que prepara un mensaje en WhatsApp y **no** lo envía automáticamente.
+4. En los catálogos y buscadores, combinar filtros y probar casos sin resultados.
+5. En AZAHAR, agregar productos, cambiar cantidades, vaciar la selección y cerrar el carrito con la tecla Escape. Comprobar que se pueda navegar con Tab.
+6. Verificar los enlaces de vuelta al portfolio y la ausencia de operaciones reales de compra, pago o reserva.
+
 
 ## Alcance
 
