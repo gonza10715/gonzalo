@@ -26,6 +26,14 @@ Abrí `index.html` en un navegador. También podés ejecutar `python -m http.ser
 - `style.css`: identidad visual y estilos adaptables.
 - `app.js`: filtros, selección de productos, demo de stock y contacto.
 
+## Nuevas demos del portfolio
+
+- [Casa Brava — restaurante con filtros de menú](demos/restaurante/index.html)
+- [Norte Studio — tienda con catálogo y carrito simulado](demos/tienda/index.html)
+- [Portfolio técnico de Gonzalo Martínez](demos/portfolio/index.html)
+
+Estas páginas están guardadas como archivos HTML en el repositorio. Para abrirlas como sitios públicos hay que configurar su publicación (por ejemplo, GitHub Pages o Netlify); el enlace al archivo en GitHub no es una vista alojada.
+
 ## Alcance
 
 Las demos usan datos ficticios. No procesan pagos ni pedidos y no guardan un inventario real. El formulario abre WhatsApp; la persona revisa y envía el mensaje. Una solución de producción requiere definir persistencia, acceso de usuarios y alcance con cada cliente.
