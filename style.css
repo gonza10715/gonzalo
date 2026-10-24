@@ -4,3 +4,17 @@
 @media(max-width:740px){.wrap{width:calc(100% - 38px)}.nav{height:82px}.brand{font-size:33px}.nav nav{gap:14px;font-size:11px}.nav nav a:last-child{display:none}.nav-contact{padding:10px 13px;font-size:11px}.nav-contact span{margin-left:12px}.hero{grid-template-columns:1fr;padding-top:45px;padding-bottom:45px;gap:28px}.hero h1{font-size:69px;letter-spacing:-4px}.eyebrow{font-size:8px;letter-spacing:1.3px}.hero-copy>p{font-size:16px}.actions{gap:20px}.button{padding:17px 20px}.hero-foot{margin-top:28px;gap:15px;font-size:9px}.hero-art{max-width:440px;width:90%;margin:0 auto;padding-top:38px;padding-bottom:30px}.orbit-label{font-size:8px}.browser{transform:rotate(-3deg)}.sample-content h2{font-size:58px}.sample-content{padding-bottom:28px}.plate{right:-45px;width:210px;height:210px}.food{font-size:140px;line-height:140px}.float-tag{right:-10px;font-size:12px;padding:15px}.ticker{padding:18px 0}.ticker>div{flex-wrap:wrap;justify-content:center;gap:15px}.ticker span{font-size:8px}.ticker span:last-child{display:none}.ticker b:last-of-type{display:none}.ticker b{font-size:16px}.section{padding-top:65px;padding-bottom:65px}.section h2{font-size:36px;letter-spacing:-1.5px}.section-head{display:block;margin-bottom:30px}.section-head>p{margin-top:22px;max-width:none;font-size:13px}.services{grid-template-columns:1fr;gap:14px}.services article{padding:27px}.services p{min-height:0}.service-icon{margin-bottom:15px}.services ul{padding-bottom:15px}.project-grid{grid-template-columns:1fr;gap:40px}.demo{padding:22px;height:360px}.project-caption h3{font-size:19px}.about{grid-template-columns:1fr;gap:10px}.process{padding-top:10px}.contact{padding:30px 24px;grid-template-columns:1fr;gap:25px}.contact h2{font-size:54px}.contact .email{font-size:11px}.contact form{padding-top:5px}footer{gap:20px;flex-wrap:wrap}footer p{font-size:10px}footer>a:last-child{margin-left:auto}.demo-title small{font-size:7px;margin-left:6px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 .whatsapp-direct{max-width:310px;margin-top:25px}.contact .phone{font-size:12px;margin:10px 0 0}.contact .email{margin-top:15px}.hero h1{font-size:clamp(53px,5.7vw,78px)}@media(max-width:740px){.hero h1{font-size:clamp(46px,11vw,68px);letter-spacing:-3px}}
+
+/* Proyectos publicados en el repositorio */
+.portfolio-demos{margin-top:68px;padding-top:44px;border-top:1px solid var(--line)}
+.portfolio-demos-heading h3{font:500 clamp(25px,3vw,38px)/1.15 Manrope,sans-serif;letter-spacing:-1.5px;margin:14px 0 8px}
+.portfolio-demos-heading p{color:var(--muted);font-size:14px;line-height:1.6}
+.portfolio-demos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.portfolio-demo-link{display:flex;flex-direction:column;padding:25px;border:1px solid #405043;border-radius:10px;background:#222d24;min-height:210px;transition:transform .2s,background .2s}
+.portfolio-demo-link:hover{opacity:1;transform:translateY(-3px);background:#2c3a2e}
+.portfolio-demo-link .demo-emoji{font-size:38px;margin-bottom:20px}
+.portfolio-demo-link strong{font-size:19px;font-weight:600}
+.portfolio-demo-link small{color:var(--muted);margin-top:5px}
+.portfolio-demo-link .go{color:var(--lime);font-size:12px;margin-top:auto;padding-top:18px}
+@media(max-width:740px){.portfolio-demos{margin-top:45px}.portfolio-demos-grid{grid-template-columns:1fr}.portfolio-demo-link{min-height:170px}}
+@media(prefers-reduced-motion:reduce){.portfolio-demo-link{transition:none}}
