@@ -36,6 +36,8 @@ Abrí `index.html` en un navegador. También podés ejecutar `python -m http.ser
 - [CLARA Dental — especialidades filtrables y turnos simulados](https://gonza10715.github.io/gonzalo/demos/sonrisa/)
 - [LOMA Propiedades — búsqueda y filtros de inmuebles ficticios](https://gonza10715.github.io/gonzalo/demos/loma/)
 - [AZAHAR Flores — catálogo floral y carrito simulado](https://gonza10715.github.io/gonzalo/demos/azahar/)
+- [PULSO Studio — clases y reserva simulada de entrenamiento](https://gonza10715.github.io/gonzalo/demos/pulso/)
+- [MARGEN Librería — búsqueda, filtros y carrito ficticio](https://gonza10715.github.io/gonzalo/demos/margen/)
 - [Portfolio técnico de Gonzalo Martínez](https://gonza10715.github.io/gonzalo/demos/portfolio/)
 
 Estas demos están publicadas mediante GitHub Pages desde la rama `main`. Son ejemplos ficticios de portfolio y no procesan operaciones reales.
