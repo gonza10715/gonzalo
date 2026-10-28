@@ -77,3 +77,11 @@ Las demos usan datos ficticios. No procesan pagos ni pedidos y no guardan un inv
 ## Autor
 
 Gonzalo Martínez · [GitHub](https://github.com/gonza10715)
+
+### Tres demos adicionales (octubre 2026)
+
+- **NAVAJA Barbería:** presentación de servicios y simulador de turno/costo ficticio (`demos/navaja/index.html`).
+- **NIDO Veterinaria:** servicios de cuidado animal y simulación de consulta (`demos/nido/index.html`).
+- **AULA ABIERTA:** catálogo de cursos con simulador de inscripción (`demos/aula/index.html`).
+
+Los datos y precios son ejemplos: estas páginas no reciben pagos, reservas ni inscripciones reales.
