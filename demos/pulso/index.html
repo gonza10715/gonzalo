@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ebe8df">
+<meta name="description" content="PULSO Studio: demo ficticia de un estudio de entrenamiento, con clases, horarios y reservas simuladas.">
+<title>PULSO — Movimiento con intención · Demo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+:root{--ink:#17201b;--paper:#ebe8df;--acid:#d5ef63;--line:#bcbeb2;--gray:#626b61}*{box-sizing:border-box}
+html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--paper);font-family:'DM Sans',sans-serif}
+a{color:inherit;text-decoration:none}button,select{font:inherit}button{cursor:pointer}
+a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #527d18;outline-offset:4px}
+.wrap{max-width:1320px;width:calc(100% - 72px);margin:auto}
+header{display:flex;align-items:center;justify-content:space-between;padding:24px 0;border-bottom:1px solid var(--line)}
+.logo{font:700 31px 'Space Grotesk',sans-serif;letter-spacing:-2px}.logo span{display:inline-block;width:12px;height:12px;background:var(--ink);border-radius:50%;margin-left:4px}
+nav{display:flex;align-items:center;gap:28px;font-size:13px;font-weight:600}.pill{background:var(--ink);color:#fff;padding:13px 20px;border-radius:30px}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.hero{display:grid;grid-template-columns:1.13fr .87fr;min-height:650px;padding:75px 0 80px;gap:50px;align-items:center}
+h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:'Space Grotesk',sans-serif}
+h1{font-size:clamp(62px,7.8vw,116px);line-height:.96;letter-spacing:-.075em;font-weight:600;margin:24px 0 32px}
+h1 em{font-style:normal;color:#6e8062}
+.hero p{max-width:475px;color:#566156;font-size:18px;line-height:1.65}
+.cta{display:inline-flex;align-items:center;gap:40px;background:var(--ink);color:#fff;padding:19px 24px;border-radius:3px;font-size:13px;font-weight:700;margin-top:20px}
+.visual{height:540px;background:#23332a;border-radius:250px 250px 9px 9px;position:relative;overflow:hidden;display:grid;place-items:center}
+.visual:before{content:"";position:absolute;width:420px;height:420px;border:85px solid #3b5141;border-radius:50%;left:-80px;top:60px}
+.visual:after{content:"";position:absolute;width:260px;height:260px;background:var(--acid);border-radius:50%;right:-58px;top:68px}
+.fig{position:relative;z-index:1;width:210px;height:320px;transform:rotate(-11deg);display:flex;justify-content:center;align-items:center}
+.fig .torso{width:138px;height:165px;background:#c4d88f;border-radius:52px 56px 26px 30px;position:absolute;top:97px;transform:skew(-12deg)}
+.fig .head{width:91px;height:100px;background:#d99c78;border-radius:50% 50% 43% 48%;position:absolute;top:16px;left:57px;box-shadow:inset 0 23px 0 #2c2925}
+.fig .arm{position:absolute;width:38px;height:174px;border-radius:30px;background:#d99c78;top:105px;left:17px;transform:rotate(37deg)}
+.fig .arm.two{left:auto;right:-3px;transform:rotate(-55deg);top:65px}
+.fig .leg{position:absolute;width:58px;height:175px;border-radius:25px;background:#333c34;top:227px;left:34px;transform:rotate(19deg)}
+.fig .leg.two{left:115px;transform:rotate(-24deg)}
+.visual-label{position:absolute;z-index:2;left:24px;bottom:26px;color:white;font-size:11px;letter-spacing:.12em}
+.stamp{position:absolute;z-index:3;right:13px;bottom:35px;background:var(--acid);padding:15px 18px;transform:rotate(8deg);font-weight:700;font-size:12px}
+.marquee{background:var(--acid);padding:19px 0;font:700 18px 'Space Grotesk',sans-serif;letter-spacing:.025em}
+.marquee .wrap{display:flex;justify-content:space-between;gap:20px}
+section.block{padding:105px 0}.section-top{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:35px}
+h2{font-size:clamp(38px,5vw,65px);letter-spacing:-.06em;line-height:1.05;margin:12px 0 0}
+.section-top p{max-width:340px;line-height:1.65;color:var(--gray);font-size:14px;margin:0}
+.classes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.class{border:1px solid var(--line);padding:28px;min-height:330px;display:flex;flex-direction:column}
+.class .number{font-size:11px;letter-spacing:.12em}.class .glyph{font:500 92px 'Space Grotesk',sans-serif;line-height:1;text-align:center;padding:35px 0 25px}
+.class h3{font-size:25px;letter-spacing:-.04em;margin-bottom:9px}.class p{font-size:13px;line-height:1.6;color:var(--gray)}
+.class .foot{margin-top:auto;border-top:1px solid var(--line);padding-top:18px;font-size:11px;font-weight:700}
+.dark{background:var(--ink);color:#e7e8dc}.dark .section-top p{color:#adb8a8}
+.schedule{display:grid;grid-template-columns:1fr 1.4fr;gap:65px;align-items:start}
+.schedule p{line-height:1.7;color:#adb8a8;font-size:14px}
+.schedule select{width:100%;margin-top:20px;background:transparent;color:white;border:1px solid #5d6c5e;padding:16px;border-radius:2px}
+.schedule option{color:var(--ink)}
+.times{display:grid;gap:10px}.slot{width:100%;border:1px solid #516050;background:transparent;color:white;display:flex;justify-content:space-between;align-items:center;padding:21px;text-align:left}
+.slot strong{font-size:15px}.slot small{color:#a7b4a5}.slot:hover,.slot[aria-pressed=true]{background:var(--acid);color:var(--ink)}.slot[aria-pressed=true] small,.slot:hover small{color:#4d5e43}
+.notice{min-height:70px;margin-top:18px;padding:19px;background:#29372c;border-left:3px solid var(--acid);font-size:13px;line-height:1.5}
+.end{padding:90px 0;display:flex;justify-content:space-between;align-items:end;gap:25px}
+.end h2{max-width:730px}.end a{white-space:nowrap}
+footer{border-top:1px solid var(--line);padding:30px 0 45px;display:flex;justify-content:space-between;gap:20px;font-size:12px;color:var(--gray)}
+@media(max-width:850px){.hero{grid-template-columns:1fr;padding:60px 0}.visual{max-width:540px;width:100%;margin:auto}.classes{grid-template-columns:1fr}.class{min-height:260px}.schedule{grid-template-columns:1fr;gap:25px}.end{display:block}.end a{margin-top:22px}}
+@media(max-width:580px){.wrap{width:calc(100% - 36px)}header{gap:12px}nav{gap:12px}nav a:not(.pill){display:none}.logo{font-size:25px}.hero{padding:42px 0 55px;gap:30px}h1{font-size:clamp(55px,14vw,76px)}.visual{height:430px}.marquee{font-size:12px}.marquee span:last-child{display:none}section.block{padding:70px 0}.section-top{display:block}.section-top p{margin-top:18px}footer{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head><body>
+<header class="wrap"><a class="logo" href="#inicio">PULSO<span></span></a><nav aria-label="Principal"><a href="#clases">Clases</a><a href="#horarios">Horarios</a><a class="pill" href="#horarios">Probar agenda ↗</a></nav></header>
+<main>
+<section id="inicio" class="hero wrap"><div><div class="kicker">ESTUDIO DE MOVIMIENTO · CONCEPTO FICTICIO</div><h1>Movete.<br>Sentite.<br>Volvé.</h1><p>Un espacio para recuperar energía, encontrar tu ritmo y disfrutar el movimiento, sin competir con nadie más.</p><a class="cta" href="#horarios">Explorar horarios <span>↗</span></a></div><div class="visual" role="img" aria-label="Ilustración geométrica de una persona en movimiento"><div class="fig"><div class="leg"></div><div class="leg two"></div><div class="torso"></div><div class="arm"></div><div class="arm two"></div><div class="head"></div></div><span class="visual-label">TU RITMO, TU ESPACIO</span><span class="stamp">EN MOVIMIENTO ↗</span></div></section>
+<div class="marquee"><div class="wrap"><span>ENERGÍA + EQUILIBRIO</span><span>✳</span><span>FUERZA + MOVILIDAD</span><span>✳</span><span>CONEXIÓN + BIENESTAR</span></div></div>
+<section class="block wrap" id="clases"><div class="section-top"><div><div class="kicker">01 / ELEGÍ TU RITMO</div><h2>Una clase.<br>Otra energía.</h2></div><p>Distintas formas de entrenar, con el mismo objetivo: sentirte mejor. Cada propuesta tiene su propia intensidad.</p></div><div class="classes"><article class="class"><span class="number">01 / FUERZA</span><div class="glyph" aria-hidden="true">↗</div><h3>Strength</h3><p>Trabajo de fuerza y resistencia, con técnica y progresión.</p><span class="foot">45 MIN · INTENSIDAD ALTA</span></article><article class="class"><span class="number">02 / MOVILIDAD</span><div class="glyph" aria-hidden="true">◎</div><h3>Flow</h3><p>Movilidad consciente, respiración y mayor libertad de movimiento.</p><span class="foot">50 MIN · INTENSIDAD SUAVE</span></article><article class="class"><span class="number">03 / CARDIO</span><div class="glyph" aria-hidden="true">≋</div><h3>Pulse</h3><p>Intervalos dinámicos para activar el cuerpo y disfrutar el desafío.</p><span class="foot">40 MIN · INTENSIDAD MEDIA</span></article></div></section>
+<section class="block dark" id="horarios"><div class="wrap schedule"><div><div class="kicker">02 / AGENDA INTERACTIVA</div><h2>Tu próxima<br>clase empieza<br>acá.</h2><p>Seleccioná una disciplina para consultar horarios y probar cómo funcionaría una reserva online.</p><label for="discipline" class="kicker">DISCIPLINA</label><select id="discipline"><option value="Strength">Strength / Fuerza</option><option value="Flow">Flow / Movilidad</option><option value="Pulse">Pulse / Cardio</option></select></div><div><div class="kicker">HORARIOS DISPONIBLES · EJEMPLO</div><div id="slots" class="times" style="margin-top:22px" aria-label="Horarios de demostración"></div><div id="notice" class="notice" role="status" aria-live="polite">Elegí un horario para simular la reserva. No se registran datos ni se confirman turnos reales.</div></div></div></section>
+<section class="wrap end"><div><div class="kicker">UNA EXPERIENCIA PENSADA PARA PERSONAS</div><h2>No esperes a tener tiempo. Encontrá tu momento.</h2></div><a class="cta" href="#horarios">Ver la agenda ↗</a></section>
+</main><footer class="wrap"><span>PULSO STUDIO · DEMO CONCEPTUAL</span><span>Proyecto ficticio · Sin clases ni reservas reales</span><a href="../../index.html#proyectos">← Volver a GM Web</a></footer>
+<script>
+const agenda={Strength:[['Lunes','07:30'],['Miércoles','18:00'],['Viernes','19:30']],Flow:[['Martes','09:00'],['Jueves','17:30'],['Sábado','10:00']],Pulse:[['Lunes','19:00'],['Miércoles','07:00'],['Sábado','11:30']]};
+const discipline=document.querySelector('#discipline'),slots=document.querySelector('#slots'),notice=document.querySelector('#notice');
+function render(){slots.replaceChildren();notice.textContent='Elegí un horario para simular la reserva. No se registran datos ni se confirman turnos reales.';agenda[discipline.value].forEach(([day,time])=>{const btn=document.createElement('button');btn.className='slot';btn.type='button';btn.setAttribute('aria-pressed','false');const label=document.createElement('strong');label.textContent=day+' · '+time;const detail=document.createElement('small');detail.textContent='Elegir horario ↗';btn.append(label,detail);btn.addEventListener('click',()=>{slots.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed','false'));btn.setAttribute('aria-pressed','true');notice.textContent='Seleccionaste '+discipline.value+' el '+day+' a las '+time+'. Es una simulación: no se guardó ninguna reserva.'});slots.append(btn)})}
+discipline.addEventListener('change',render);render();
+</script>
+</body></html>
