@@ -37,3 +37,22 @@
 .demo-empty{border:1px dashed #647365;color:#d1d9ce;padding:26px;margin:18px 0 0;border-radius:8px;line-height:1.6}
 @media(max-width:740px){.demo-tools{padding:17px}.demo-filters{gap:7px}.demo-filters button{font-size:12px;padding:10px 12px}}
 @media(prefers-reduced-motion:reduce){.demo-filters button{transition:none}}
+
+/* Preguntas comerciales: sin promesas genéricas ni precios inventados. */
+.faq{padding-top:95px;padding-bottom:95px;border-top:1px solid var(--line)}
+.faq .section-head{margin-bottom:35px}
+.faq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.faq-grid details{border:1px solid #435345;border-radius:12px;background:#1b251e;min-width:0}
+.faq-grid summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:24px 23px;font-weight:700;font-size:17px;cursor:pointer;line-height:1.4}
+.faq-grid summary::-webkit-details-marker{display:none}
+.faq-grid summary span{font-size:26px;font-weight:400;color:var(--lime);transition:transform .2s}
+.faq-grid details[open] summary span{transform:rotate(45deg)}
+.faq-grid details p{color:var(--muted);font-size:14px;line-height:1.8;padding:0 23px 23px;margin:0}
+.faq-grid summary:focus-visible{outline:3px solid var(--lime);outline-offset:4px}
+.faq-cta{margin-top:28px;padding:27px 30px;background:#263528;border-radius:12px;display:flex;gap:25px;align-items:center;justify-content:space-between}
+.faq-cta strong{font:700 22px/1.3 Manrope,sans-serif}
+.faq-cta p{color:#c0cfc0;line-height:1.6;margin:8px 0 0}
+.faq-cta .button{flex-shrink:0}
+.footer-github{text-decoration:underline;color:var(--lime);display:inline-block;margin-top:9px}
+@media(max-width:740px){.faq{padding-top:65px;padding-bottom:65px}.faq-grid{grid-template-columns:1fr}.faq-cta{flex-direction:column;align-items:flex-start;padding:25px}.faq-cta .button{width:100%;justify-content:center}}
+@media(prefers-reduced-motion:reduce){.faq-grid summary span{transition:none}}
