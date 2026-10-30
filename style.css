@@ -22,3 +22,18 @@
 /* Accesibilidad: acceso rápido al contenido mediante teclado. */
 .skip-link{position:absolute;z-index:100;top:-80px;left:16px;padding:12px 18px;background:var(--lime);color:var(--bg);font-weight:700;border-radius:5px}
 .skip-link:focus{top:12px}
+
+/* Catálogo más fácil de explorar, también desde celular. */
+.demo-tools{margin-top:25px;padding:22px;border:1px solid #3a493d;border-radius:12px;background:#1a241c}
+.demo-tools label{display:block;font-size:12px;font-weight:700;color:#d7e0d7;margin-bottom:9px}
+.demo-tools input{width:100%;max-width:500px;padding:13px 15px;border-radius:8px;border:1px solid #526154;background:#0e1610;color:var(--text);font-size:15px}
+.demo-tools input::placeholder{color:#a3ada5}
+.demo-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.demo-filters button{background:transparent;color:#d5ddd3;border:1px solid #526154;padding:9px 14px;border-radius:99px;font-size:13px;transition:background .15s,color .15s}
+.demo-filters button:hover{border-color:var(--lime)}
+.demo-filters button.active{background:var(--lime);border-color:var(--lime);color:#111713;font-weight:700}
+.demo-results{font-size:12px;color:var(--muted);margin:14px 0 0}
+.portfolio-demo-link[hidden],.demo-empty[hidden]{display:none!important}
+.demo-empty{border:1px dashed #647365;color:#d1d9ce;padding:26px;margin:18px 0 0;border-radius:8px;line-height:1.6}
+@media(max-width:740px){.demo-tools{padding:17px}.demo-filters{gap:7px}.demo-filters button{font-size:12px;padding:10px 12px}}
+@media(prefers-reduced-motion:reduce){.demo-filters button{transition:none}}
