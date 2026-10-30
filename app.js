@@ -7,3 +7,31 @@ function renderStock(){const container=document.querySelector('#stock-items');co
 function changeStock(i,d){units[i]=Math.max(0,units[i]+d);renderStock();document.querySelector('#stock-status').textContent=`${names[i]}: ${units[i]} unidades.`}document.querySelector('#reset-stock').onclick=()=>{units=[...initial];renderStock();document.querySelector('#stock-status').textContent='Demo restablecida.'};renderStock();
 document.querySelectorAll('[data-service]').forEach(a=>a.addEventListener('click',()=>{document.querySelector('#service').value=a.dataset.service}));
 document.querySelector('#contact-form').addEventListener('submit',event=>{event.preventDefault();const name=document.querySelector('#name').value.trim();const message=document.querySelector('#message').value.trim();if(!name||!message){document.querySelector('#form-note').textContent='Completá tu nombre y una breve descripción de tu idea.';return}const service=document.querySelector('#service').value;const body=`Hola Gonzalo, soy ${name}.\n\nMe interesa: ${service}.\n\n${message}\n\n¡Gracias!`;window.location.href=`https://wa.me/5491132284507?text=${encodeURIComponent(body)}`;document.querySelector('#form-note').textContent='Revisá y enviá el mensaje desde WhatsApp. Si no se abrió, usá el botón de WhatsApp o el email de esta sección.'});
+
+// Catálogo: filtros de rubro y búsqueda tolerante a tildes.
+const demoSearch=document.querySelector('#demo-search');
+const demoCards=[...document.querySelectorAll('.portfolio-demo-link[data-demo-type]')];
+const demoResults=document.querySelector('#demo-results');
+const demoEmpty=document.querySelector('#demo-empty');
+const demoFilters=[...document.querySelectorAll('[data-demo-filter]')];
+let selectedDemoFilter='todos';
+const normalizeDemo=text=>text.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+function filterDemos(){
+  const query=normalizeDemo(demoSearch.value.trim());
+  let visible=0;
+  demoCards.forEach(card=>{
+    const inCategory=selectedDemoFilter==='todos'||card.dataset.demoType===selectedDemoFilter;
+    const matches=normalizeDemo(card.textContent).includes(query);
+    card.hidden=!(inCategory&&matches);
+    if(!card.hidden)visible++;
+  });
+  demoResults.textContent=visible===1?'1 demo disponible':visible+' demos disponibles';
+  demoEmpty.hidden=visible!==0;
+}
+demoSearch.addEventListener('input',filterDemos);
+demoFilters.forEach(button=>button.addEventListener('click',()=>{
+  selectedDemoFilter=button.dataset.demoFilter;
+  demoFilters.forEach(item=>{const active=item===button;item.classList.toggle('active',active);item.setAttribute('aria-pressed',String(active));});
+  filterDemos();
+}));
+filterDemos();
