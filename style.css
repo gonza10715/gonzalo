@@ -56,3 +56,7 @@
 .footer-github{text-decoration:underline;color:var(--lime);display:inline-block;margin-top:9px}
 @media(max-width:740px){.faq{padding-top:65px;padding-bottom:65px}.faq-grid{grid-template-columns:1fr}.faq-cta{flex-direction:column;align-items:flex-start;padding:25px}.faq-cta .button{width:100%;justify-content:center}}
 @media(prefers-reduced-motion:reduce){.faq-grid summary span{transition:none}}
+
+/* Ajustes para dispositivos estrechos: evitar que la barra de navegación desborde. */
+@media(max-width:640px){.nav nav{display:none}.nav{gap:16px}.nav-contact{margin-left:auto;white-space:nowrap}.hero-foot{flex-wrap:wrap}.faq-cta{gap:18px}}
+@media(max-width:380px){.wrap{width:calc(100% - 28px)}.hero h1{font-size:clamp(41px,11vw,52px)}.actions{flex-wrap:wrap}.demo{padding:16px}.menu-item{gap:7px}.sample-content h2{font-size:48px}.contact{padding:26px 18px}}
