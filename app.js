@@ -15,6 +15,8 @@ const demoResults=document.querySelector('#demo-results');
 const demoEmpty=document.querySelector('#demo-empty');
 const demoFilters=[...document.querySelectorAll('[data-demo-filter]')];
 let selectedDemoFilter='todos';
+const showAllDemos=document.querySelector('#show-all-demos');
+let demosExpanded=false;
 const normalizeDemo=text=>text.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 function filterDemos(){
   const query=normalizeDemo(demoSearch.value.trim());
@@ -22,12 +24,17 @@ function filterDemos(){
   demoCards.forEach(card=>{
     const inCategory=selectedDemoFilter==='todos'||card.dataset.demoType===selectedDemoFilter;
     const matches=normalizeDemo(card.textContent).includes(query);
-    card.hidden=!(inCategory&&matches);
+    const inInitialSelection=demosExpanded||query||selectedDemoFilter!=='todos'||demoCards.indexOf(card)<6;
+    card.hidden=!(inCategory&&matches&&inInitialSelection);
     if(!card.hidden)visible++;
   });
   demoResults.textContent=visible===1?'1 demo disponible':visible+' demos disponibles';
   demoEmpty.hidden=visible!==0;
+  const defaultView=!query&&selectedDemoFilter==='todos';
+  showAllDemos.hidden=!defaultView||demosExpanded;
+  showAllDemos.setAttribute('aria-expanded',String(demosExpanded));
 }
+showAllDemos.addEventListener('click',()=>{demosExpanded=true;filterDemos();});
 demoSearch.addEventListener('input',filterDemos);
 demoFilters.forEach(button=>button.addEventListener('click',()=>{
   selectedDemoFilter=button.dataset.demoFilter;
