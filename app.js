@@ -24,7 +24,7 @@ function filterDemos(){
   demoCards.forEach(card=>{
     const inCategory=selectedDemoFilter==='todos'||card.dataset.demoType===selectedDemoFilter;
     const matches=normalizeDemo(card.textContent).includes(query);
-    const inInitialSelection=demosExpanded||query||selectedDemoFilter!=='todos'||demoCards.indexOf(card)<6;
+    const inInitialSelection=demosExpanded||query||selectedDemoFilter!=='todos'||demoCards.indexOf(card)<6||demoCards.indexOf(card)>=demoCards.length-4;
     card.hidden=!(inCategory&&matches&&inInitialSelection);
     if(!card.hidden)visible++;
   });
