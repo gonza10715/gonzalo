@@ -1,0 +1,21 @@
+/* GM Web · mejoras compartidas de experiencia, sin alterar el lenguaje visual de cada demo. */
+html{scroll-padding-top:24px;-webkit-text-size-adjust:100%}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+:where(img,video,svg){max-width:100%}
+:where(img,video){height:auto}
+:where(h1,h2,h3,p,li){overflow-wrap:break-word}
+:where(button,input,select,textarea){font-family:inherit}
+:where(button,[role="button"]){touch-action:manipulation}
+:where(button,a,input,select,textarea,[tabindex]):focus-visible{
+  outline:3px solid currentColor;outline-offset:4px
+}
+:where(main section[id],main div[id]){scroll-margin-top:28px}
+[hidden]{display:none!important}
+@media(max-width:600px){
+  :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),select,textarea){font-size:max(16px,1em)}
+  :where(button,a){-webkit-tap-highlight-color:transparent}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
