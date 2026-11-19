@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Demostración de cotizador de muebles a medida · GM Web</title>
+  <meta name="description" content="Prototipo ilustrativo de formulario para consultas sobre muebles a medida. No es un sitio oficial ni envía solicitudes.">
+  <style>
+    :root { --ink:#183229; --forest:#16392e; --gold:#ac793e; --paper:#f7f4ec; --line:#e4ddd0; --muted:#6b746d; --card:#fffefa; --error:#b63d30; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); font:16px/1.56 system-ui,-apple-system,Segoe UI,Arial,sans-serif; color:var(--ink); }
+    a { color:inherit; }
+    .site-top { display:flex;justify-content:space-between;align-items:center;gap:16px;background:var(--forest);color:#fff;padding:15px max(22px,calc((100vw - 1150px)/2)); }
+    .brand { font-size:15px; letter-spacing:.11em; font-weight:750; }
+    .brand small { display:block;font-size:10px;letter-spacing:.21em;font-weight:500;opacity:.7;margin-top:2px; }
+    .toplink { color:#f5e7d1; font-size:13px;text-decoration:none;border:1px solid #ffffff45;padding:8px 11px;border-radius:100px; }
+    .notice { padding:8px 20px;text-align:center;background:#efe5d1;color:#654a2d;font-size:12px;font-weight:600;letter-spacing:.02em; }
+    .wrap { width:min(1120px,calc(100% - 40px));margin:auto; }
+    .hero { position:relative;overflow:hidden;background:radial-gradient(circle at 60% -20%,#fff8e5 10%,transparent 56%),linear-gradient(120deg,#f4eee0,#faf8f1);padding:72px 0 55px; }
+    .hero-inner { display:grid; grid-template-columns:1.03fr .97fr; align-items:center; gap:40px; }
+    .kicker { color:var(--gold); font-weight:800;letter-spacing:.2em;font-size:11px;text-transform:uppercase; }
+    h1 { font-size:clamp(38px,5.2vw,66px);line-height:1.07;letter-spacing:-.055em;font-weight:680;margin:16px 0 21px;max-width:650px; }
+    h1 em { font-style:normal;color:#9b6c3f; }
+    .hero p { max-width:540px;color:#626b60;font-size:17px;margin:0 0 28px; }
+    .button { border:0; display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;border-radius:9px;padding:14px 21px;background:var(--forest);color:white;font-size:14px;font-weight:700;cursor:pointer;transition:transform .16s,background .16s; }
+    .button:hover,.button:focus-visible { transform:translateY(-2px); background:#245442; }
+    .button.secondary { background:transparent;color:var(--forest);border:1px solid #a9b4a7; }
+    .hero-art { background:linear-gradient(160deg,#e4dbc8,#c4b197);border-radius:23px;box-shadow:0 25px 60px #74533125;min-height:350px;display:grid;place-items:center;position:relative;padding:20px; }
+    .art-label { position:absolute;bottom:20px;left:22px;background:#fff9e9e9;border-radius:6px;padding:9px 12px;font-size:12px;color:#5a452e;letter-spacing:.03em; }
+    .hero-art svg { width:100%;max-height:350px; }
+    .steps { display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:29px;margin-bottom:65px; }
+    .step { padding:21px 22px;background:#fffefb;border:1px solid var(--line);border-radius:14px; }
+    .step .num { font-size:13px;font-weight:800;color:var(--gold);letter-spacing:.05em; }
+    .step strong { display:block;margin-top:4px;font-size:15px; }
+    .step p { color:#737b74;font-size:13px;margin:7px 0 0; }
+    .section-label { display:block;font-size:11px;letter-spacing:.17em;font-weight:800;color:#a1774b;text-transform:uppercase; }
+    .form-heading { display:flex;align-items:end;justify-content:space-between;gap:20px;margin:0 0 21px; }
+    h2 {font-size:clamp(25px,3.5vw,38px);line-height:1.18;letter-spacing:-.035em;margin:8px 0 5px;}
+    .form-heading p {font-size:13px;color:#788078;max-width:310px;margin:0;}
+    .form-layout {display:grid;grid-template-columns:minmax(0,1.5fr) minmax(290px,.8fr);gap:22px;align-items:start;margin-bottom:67px;}
+    .panel {background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 35px #473a2410;}
+    form {padding:30px;}
+    .fieldset-title {display:flex;align-items:center;gap:10px;margin:0 0 19px;font-weight:750;font-size:16px;}
+    .fieldset-title .pill {background:#e6ebdf;color:var(--forest);border-radius:100px;padding:3px 9px;font-size:11px;font-weight:750;}
+    .fields {display:grid;grid-template-columns:1fr 1fr;gap:17px;}
+    .field {display:flex;flex-direction:column;gap:6px;min-width:0;}
+    .field.full {grid-column:1/-1;}
+    label {font-weight:680;font-size:13px;}
+    .hint {font-size:11px;color:#778078;line-height:1.5;}
+    input, select, textarea {width:100%;max-width:100%;font:inherit;font-size:14px;color:var(--ink);padding:12px 13px;background:#fff;border:1px solid #d9ded5;border-radius:8px;outline:0;}
+    input:focus,select:focus,textarea:focus {border-color:#7c977d;box-shadow:0 0 0 3px #8caa8b24;}
+    textarea {min-height:102px;resize:vertical;}
+    input[type=file] {font-size:12px;border-style:dashed;background:#f8f9f5;padding:14px;}
+    .separator {margin:27px 0;border:0;border-top:1px solid var(--line);}
+    .options {display:flex;gap:10px;flex-wrap:wrap;}
+    .choice {border:1px solid #d6ddcf;border-radius:100px;padding:6px 10px;background:#f9fbf6;color:#315041;font-size:12px;}
+    .action-row {display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:25px;}
+    .disclaimer {color:#7a8077;font-size:11px;margin:0;line-height:1.55;}
+    .aside {padding:28px 25px;position:sticky;top:20px;}
+    .aside-icon {display:grid;place-items:center;width:45px;height:45px;background:#e8eddf;border-radius:12px;font-size:22px;}
+    .aside h3 {font-size:22px;letter-spacing:-.03em;margin:18px 0 7px;}
+    .aside p {font-size:13px;color:#737a72;margin:0 0 20px;}
+    .aside ul {margin:0;padding:0;list-style:none;display:grid;gap:13px;}
+    .aside li {font-size:13px;display:flex;gap:9px;align-items:start;}
+    .check {font-weight:800;color:#648064;}
+    .not-real {margin-top:23px;background:#f5f0e5;border:1px solid #eadfc8;border-radius:9px;padding:14px;color:#6b5a3c;font-size:12px;line-height:1.6;}
+    .preview {margin-top:20px;padding:25px;background:#ecf1e8;border:1px solid #c5d3bf;border-radius:15px;}
+    .preview[hidden] {display:none;}
+    .preview h3 {margin:0 0 5px;font-size:21px;}
+    .preview p {color:#586759;font-size:13px;margin:0 0 15px;}
+    .summary {display:grid;grid-template-columns:1fr 1fr;gap:10px;background:white;border-radius:10px;padding:16px;}
+    .summary div {border-bottom:1px solid #eee;padding-bottom:8px;min-width:0;}
+    .summary strong {display:block;font-size:10px;color:#809084;text-transform:uppercase;letter-spacing:.06em;}
+    .summary span {font-size:13px;overflow-wrap:anywhere;white-space:pre-wrap;}
+    .footer {background:var(--forest);color:#d5ded4;padding:24px 20px;font-size:12px;text-align:center;}
+    .footer a {color:#fff;text-decoration:underline;}
+    @media(max-width:810px){.hero-inner{grid-template-columns:1fr;gap:25px}.hero{padding:46px 0 40px}.hero-art{min-height:270px}.hero-art svg{max-height:270px}.form-layout{grid-template-columns:1fr}.aside{position:static}.steps{grid-template-columns:1fr;gap:10px}.form-heading{display:block}.form-heading p{margin-top:10px}}
+    @media(max-width:520px){.fields,.summary{grid-template-columns:1fr}.toplink{display:none}.wrap{width:calc(100% - 28px)}form{padding:20px}.hero-art{min-height:240px}.notice{font-size:11px} .aside{padding:22px}.steps{margin-bottom:40px}}
+  </style>
+</head>
+<body>
+  <header class="site-top">
+    <div class="brand">MUEBLES AGUILAR <small>CONCEPTO DE COTIZADOR · DEMO</small></div>
+    <a class="toplink" href="https://mueblesaguilar.com.mx/" target="_blank" rel="noopener noreferrer">Visitar sitio oficial ↗</a>
+  </header>
+  <div class="notice">DEMOSTRACIÓN ILUSTRATIVA CREADA POR GM WEB · NO ES EL SITIO OFICIAL · NO SE ENVÍAN DATOS</div>
+  <main>
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <div class="kicker">Cada detalle comienza con una idea</div>
+          <h1>El mueble que imaginas, <em>hecho a tu medida.</em></h1>
+          <p>Cuéntanos qué necesitas, comparte medidas y referencias, y prepararemos una solicitud clara para que el taller pueda evaluar tu proyecto.</p>
+          <a class="button" href="#cotizar">Probar el formulario <span aria-hidden="true">→</span></a>
+          <a class="button secondary" href="https://mueblesaguilar.com.mx/" target="_blank" rel="noopener noreferrer" style="margin:6px 0 0 7px">Sitio actual ↗</a>
+        </div>
+        <div class="hero-art" aria-label="Ilustración original de un aparador de madera a medida">
+          <svg viewBox="0 0 500 400" role="img" aria-label="Mueble de madera ilustrado">
+            <defs>
+              <linearGradient id="wood" x1="0" x2="1"><stop stop-color="#8d633e"/><stop offset="1" stop-color="#b98a59"/></linearGradient>
+              <linearGradient id="shade" x1="0" x2="1"><stop stop-color="#704e31"/><stop offset="1" stop-color="#916540"/></linearGradient>
+            </defs>
+            <ellipse cx="255" cy="349" rx="179" ry="24" fill="#5c47314a"/>
+            <path d="M76 324L73 120 428 117 428 324Z" fill="url(#wood)" stroke="#66472e" stroke-width="7"/>
+            <path d="M67 109L423 105 437 120 75 124Z" fill="#d1a779" stroke="#755337" stroke-width="5"/>
+            <path d="M95 140H245V309H95Z" fill="url(#shade)" stroke="#d9aa77" stroke-width="4"/>
+            <path d="M257 140H407V309H257Z" fill="url(#shade)" stroke="#d9aa77" stroke-width="4"/>
+            <path d="M115 155H225V295H115ZM277 155H387V295H277Z" fill="none" stroke="#b88a58" stroke-width="3" opacity=".8"/>
+            <path d="M182 213v33M320 213v33" stroke="#e8c599" stroke-width="8" stroke-linecap="round"/>
+            <path d="M90 324h33v22H97zM384 324h32v22h-26z" fill="#5c3b28"/>
+            <path d="M120 161c10 19-8 34 6 51s-5 37 8 56m33-117c-10 21 11 43-6 64m124-55c11 16-4 31 6 48m77-40c-12 18 7 32-4 54" fill="none" stroke="#ca9b64" stroke-width="2" opacity=".35"/>
+            <path d="M388 105V65m-25 1h50M399 65V49" stroke="#60482e" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="389" cy="48" rx="42" ry="12" fill="#e6d6b4"/>
+          </svg>
+          <div class="art-label">Ejemplo visual · muebles personalizados</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <section class="steps" aria-label="Cómo funcionaría">
+        <div class="step"><div class="num">01 · TU IDEA</div><strong>Describe tu proyecto</strong><p>Selecciona el tipo de mueble e indica medidas aproximadas.</p></div>
+        <div class="step"><div class="num">02 · REFERENCIAS</div><strong>Comparte fotos o planos</strong><p>En la versión completa se podrían adjuntar referencias para revisar.</p></div>
+        <div class="step"><div class="num">03 · ASESORÍA</div><strong>Recibe una respuesta</strong><p>El taller revisaría los datos para preparar una propuesta o agendar medidas.</p></div>
+      </section>
+
+      <section id="cotizar" aria-labelledby="cotizar-title">
+        <div class="form-heading">
+          <div><span class="section-label">Ejemplo interactivo</span><h2 id="cotizar-title">Cuéntanos qué imaginas</h2></div>
+          <p>Llena los campos de prueba y presiona «Ver solicitud». Tus datos no se envían ni guardan.</p>
+        </div>
+        <div class="form-layout">
+          <div>
+            <div class="panel">
+              <form id="quote" novalidate>
+                <p class="fieldset-title"><span class="pill">01</span> Sobre tu mueble</p>
+                <div class="fields">
+                  <div class="field"><label for="tipo">¿Qué necesitas? *</label><select id="tipo" required><option value="">Selecciona una opción</option><option>Cocina integral</option><option>Clóset o vestidor</option><option>Puerta de madera</option><option>Escalera o barandal</option><option>Comedor o mesa</option><option>Mueble de TV</option><option>Oficina o escritorio</option><option>Otro mueble a medida</option></select></div>
+                  <div class="field"><label for="material">Madera o material preferido</label><select id="material"><option value="">Aún no lo sé</option><option>Parota</option><option>Encino</option><option>Cedro</option><option>Caoba</option><option>Otro / asesoría</option></select></div>
+                  <div class="field"><label for="ancho">Ancho aprox. (cm)</label><input id="ancho" type="number" min="1" max="10000" placeholder="Ej. 180" inputmode="decimal"></div>
+                  <div class="field"><label for="alto">Alto aprox. (cm)</label><input id="alto" type="number" min="1" max="10000" placeholder="Ej. 220" inputmode="decimal"></div>
+                  <div class="field full"><label for="descripcion">¿Cómo te gustaría que fuera? *</label><textarea id="descripcion" required placeholder="Ej. Un clóset con puertas corredizas, acabado claro y espacio para cajones..."></textarea></div>
+                  <div class="field full"><label for="archivos">Fotos, croquis o planos (opcional)</label><input type="file" id="archivos" accept=".jpg,.jpeg,.png,.pdf,.webp" multiple><span class="hint" id="files-hint">Solo se muestran los nombres en esta demostración. Los archivos no se cargan ni se envían.</span></div>
+                </div>
+                <hr class="separator">
+                <p class="fieldset-title"><span class="pill">02</span> Contacto y ubicación</p>
+                <div class="fields">
+                  <div class="field"><label for="nombre">Nombre *</label><input id="nombre" type="text" autocomplete="off" placeholder="Ej. María López" required></div>
+                  <div class="field"><label for="correo">Correo *</label><input id="correo" type="email" autocomplete="off" placeholder="nombre@ejemplo.com" required></div>
+                  <div class="field"><label for="ciudad">Ciudad o municipio</label><input id="ciudad" type="text" placeholder="Ej. Córdoba, Veracruz"></div>
+                  <div class="field"><label for="contacto">Contacto preferido</label><select id="contacto"><option>Correo electrónico</option><option>WhatsApp</option><option>Llamada</option></select></div>
+                </div>
+                <div class="action-row">
+                  <button class="button" type="submit">Ver ejemplo de solicitud →</button>
+                  <p class="disclaimer">No se enviará ningún mensaje.<br>Demostración local sin servidor ni base de datos.</p>
+                </div>
+                <p id="error" role="alert" style="color:var(--error);font-size:13px;margin:14px 0 0" hidden></p>
+              </form>
+            </div>
+            <div class="preview" id="preview" hidden aria-live="polite" tabindex="-1">
+              <h3>Así llegaría una solicitud organizada</h3>
+              <p>Vista de ejemplo para el equipo comercial. Esta información no ha sido enviada a nadie.</p>
+              <div class="summary" id="summary"></div>
+            </div>
+          </div>
+
+          <aside class="panel aside">
+            <div class="aside-icon">✦</div>
+            <h3>Menos mensajes, más información útil</h3>
+            <p>En lugar de comenzar cada conversación desde cero, el cliente enviaría los datos principales de su proyecto desde el celular.</p>
+            <ul>
+              <li><span class="check">✓</span><span>Tipo de mueble y medidas aproximadas.</span></li>
+              <li><span class="check">✓</span><span>Descripción y material deseado.</span></li>
+              <li><span class="check">✓</span><span>Referencias o planos en la versión completa.</span></li>
+              <li><span class="check">✓</span><span>Datos ordenados para facilitar la cotización.</span></li>
+              <li><span class="check">✓</span><span>Adaptación visual al sitio actual.</span></li>
+            </ul>
+            <div class="not-real"><strong>Esto es un prototipo, no un sistema en producción.</strong><br>Para que los pedidos lleguen por correo o WhatsApp, habría que integrar y probar el envío real con autorización del negocio.</div>
+          </aside>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="footer">Prototipo conceptual independiente realizado por <strong>GM Web</strong> · No representa una modificación ni una sección oficial de Muebles Aguilar · <a href="https://mueblesaguilar.com.mx/" target="_blank" rel="noopener noreferrer">Sitio original</a></footer>
+  <script>
+    (function () {
+      const form=document.getElementById("quote"), preview=document.getElementById("preview"), summary=document.getElementById("summary"), error=document.getElementById("error");
+      const input=(id)=>document.getElementById(id);
+      input("archivos").addEventListener("change",()=>{let files=[...input("archivos").files];input("files-hint").textContent=files.length ? files.length+" archivo(s) seleccionado(s): "+files.map(x=>x.name).join(", ")+". Solo demostración; no se envían." : "Solo se muestran los nombres. Los archivos no se cargan ni se envían."});
+      form.addEventListener("submit",(event)=>{
+        event.preventDefault();
+        if(!form.checkValidity()) {error.hidden=false;error.textContent="Completa los campos obligatorios y revisa el formato del correo para ver el ejemplo.";form.reportValidity();preview.hidden=true;return;}
+        error.hidden=true;summary.replaceChildren();
+        const fields=[
+          ["Proyecto",input("tipo").value],["Madera o material",input("material").value||"Por definir"],["Medidas aproximadas",[input("ancho").value?"Ancho "+input("ancho").value+" cm":"",input("alto").value?"Alto "+input("alto").value+" cm":""].filter(Boolean).join(" · ")||"Por confirmar"],
+          ["Descripción",input("descripcion").value],["Nombre",input("nombre").value],["Correo",input("correo").value],["Ciudad",input("ciudad").value||"Por confirmar"],
+          ["Contacto preferido",input("contacto").value],["Referencias",input("archivos").files.length+" archivo(s) seleccionado(s), no enviados"]
+        ];
+        for(const [label,val] of fields){const wrapper=document.createElement("div"),title=document.createElement("strong"),body=document.createElement("span");title.textContent=label;body.textContent=val;wrapper.append(title,body);summary.append(wrapper)}
+        preview.hidden=false;preview.focus();preview.scrollIntoView({behavior:"smooth",block:"start"});
+      });
+    })();
+  </script>
+</body>
+</html>
