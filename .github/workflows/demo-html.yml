@@ -1,0 +1,27 @@
+name: Portfolio HTML checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "demos/**"
+      - "scripts/check_demo_html.py"
+      - ".github/workflows/demo-html.yml"
+  pull_request:
+    paths:
+      - "index.html"
+      - "demos/**"
+      - "scripts/check_demo_html.py"
+      - ".github/workflows/demo-html.yml"
+
+jobs:
+  html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Run HTML checks
+        run: python scripts/check_demo_html.py
