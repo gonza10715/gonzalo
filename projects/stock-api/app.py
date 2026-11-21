@@ -6,6 +6,8 @@ from flask import Flask, jsonify, request
 
 HERE = Path(__file__).resolve().parent
 SCHEMA = (HERE / "schema.sql").read_text(encoding="utf-8")
+MAX_QUANTITY = 1_000_000_000
+MAX_PRICE_CENTS = 100_000_000_000
 
 
 def create_app(database=None):
@@ -41,12 +43,16 @@ def create_app(database=None):
         data = request.get_json(silent=True)
         if not isinstance(data, dict):
             return jsonify(error="Se necesita un objeto JSON."), 400
-        sku, name = str(data.get("sku", "")).strip(), str(data.get("name", "")).strip()
+        raw_sku, raw_name = data.get("sku"), data.get("name")
+        if not isinstance(raw_sku, str) or not isinstance(raw_name, str):
+            return jsonify(error="SKU y nombre deben ser texto."), 400
+        sku, name = raw_sku.strip(), raw_name.strip()
         qty, price = data.get("quantity", 0), data.get("price_cents", 0)
         if not (1 <= len(sku) <= 40 and 1 <= len(name) <= 100):
             return jsonify(error="SKU o nombre inválido."), 400
-        if type(qty) is not int or type(price) is not int or qty < 0 or price < 0:
-            return jsonify(error="Cantidad y precio deben ser enteros no negativos."), 400
+        if (type(qty) is not int or type(price) is not int or
+                not 0 <= qty <= MAX_QUANTITY or not 0 <= price <= MAX_PRICE_CENTS):
+            return jsonify(error="Cantidad o precio fuera del rango permitido."), 400
         try:
             with connect() as con:
                 cur = con.execute(
@@ -67,12 +73,18 @@ def create_app(database=None):
         with connect() as con:
             cur = con.execute(
                 "UPDATE products SET quantity=quantity+? "
-                "WHERE id=? AND quantity+?>=0",
-                (delta, product_id, delta),
+                "WHERE id=? AND quantity+? BETWEEN 0 AND ?",
+                (delta, product_id, delta, MAX_QUANTITY),
             )
             if cur.rowcount == 0:
-                exists = con.execute("SELECT 1 FROM products WHERE id=?", (product_id,)).fetchone()
-                return jsonify(error="Stock insuficiente." if exists else "Producto no encontrado."), 409 if exists else 404
+                existing = con.execute(
+                    "SELECT quantity FROM products WHERE id=?", (product_id,)
+                ).fetchone()
+                if not existing:
+                    return jsonify(error="Producto no encontrado."), 404
+                error = ("Stock insuficiente." if existing["quantity"] + delta < 0
+                         else "Stock supera el límite permitido.")
+                return jsonify(error=error), 409
             row = con.execute("SELECT id,sku,name,quantity,price_cents FROM products WHERE id=?", (product_id,)).fetchone()
         return jsonify(dict(row))
 
