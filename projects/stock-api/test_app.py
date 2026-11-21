@@ -94,3 +94,23 @@ def test_limit_results_to_one_hundred(client):
     results = client.get("/api/products").json
     assert len(results) == 100
     assert results[0]["sku"] == "SKU-104"
+
+
+def test_search_escapes_like_wildcards(client):
+    items = [
+        product(sku="SALE_01", name="Oferta 15%"),
+        product(sku="CODE-02", name="Producto sin símbolos"),
+        product(sku="PATH\\\\09", name="Código de barra"),
+    ]
+    for item in items:
+        assert client.post("/api/products", json=item).status_code == 201
+
+    def skus(term):
+        response = client.get("/api/products", query_string={"q": term})
+        assert response.status_code == 200
+        return [row["sku"] for row in response.json]
+
+    assert skus("%") == ["SALE_01"]
+    assert skus("_") == ["SALE_01"]
+    assert skus("\\") == ["PATH\\\\09"]
+    assert len(skus("")) == 3

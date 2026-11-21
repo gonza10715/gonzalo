@@ -30,11 +30,15 @@ def create_app(database=None):
     @app.get("/api/products")
     def list_products():
         term = request.args.get("q", "").strip()[:100]
+        # Treat '%' and '_' as text, not LIKE wildcards.
+        escaped = term.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+        pattern = f"%{escaped}%"
         with connect() as con:
             rows = con.execute(
                 "SELECT id, sku, name, quantity, price_cents FROM products "
-                "WHERE name LIKE ? OR sku LIKE ? ORDER BY id DESC LIMIT 100",
-                (f"%{term}%", f"%{term}%"),
+                "WHERE name LIKE ? ESCAPE '\\' OR sku LIKE ? ESCAPE '\\' "
+                "ORDER BY id DESC LIMIT 100",
+                (pattern, pattern),
             ).fetchall()
         return jsonify([dict(row) for row in rows])
 
