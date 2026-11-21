@@ -3,6 +3,7 @@
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,12 +18,17 @@ class PageParser(HTMLParser):
         self.viewport = False
         self.title = ""
         self.in_title = False
+        self.local_references = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if attrs.get("id"):
             self.ids.append(attrs["id"])
         href = attrs.get("href", "")
+        for name in ("href", "src", "poster"):
+            value = attrs.get(name)
+            if value:
+                self.local_references.append(value)
         if href.startswith("#") and href != "#":
             self.fragments.append(href[1:])
         if tag == "meta" and attrs.get("name", "").lower() == "viewport":
@@ -56,6 +62,24 @@ def check_page(path):
     broken = sorted(set(parser.fragments) - set(parser.ids))
     if broken:
         problems.append("broken same-page anchors: " + ", ".join(broken))
+
+    # GitHub Pages hosts this project under /gonzalo/. Validate local assets
+    # and links relative to the page, independently of external services.
+    for reference in parser.local_references:
+        parsed = urlsplit(reference)
+        if parsed.scheme or parsed.netloc or not parsed.path:
+            continue
+        if parsed.path.startswith("/"):
+            problems.append("root-relative path may fail on project Pages: " + reference)
+            continue
+        candidate = (path.parent / unquote(parsed.path)).resolve()
+        if not candidate.is_relative_to(ROOT.resolve()):
+            problems.append("path escapes published site: " + reference)
+            continue
+        if candidate.is_dir():
+            candidate = candidate / "index.html"
+        if not candidate.is_file():
+            problems.append("missing local reference: " + reference)
     return problems
 
 
